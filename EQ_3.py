@@ -1,5 +1,7 @@
 ############ if P:\Advanced not recognized, go into vscode --> settings.json --> delete the beginning of "" 
 ############ and leave "JSON_project\\Scripts\\python.exe"
+
+#################### if pyplot doesnt work (line under the "from"s) then go into the terminal and do: pip3 install pyplot
 import json
 
 in_file = open("eq_data_1_day_m1.json","r")
@@ -26,6 +28,7 @@ for eq in list_of_eqs:
     ###############################So the key is properties, and the key of that is mag
     lon = eq["geometry"]["coordinates"][0]
     lat = eq["geometry"]["coordinates"][1]
+    hover = eq["properties"]["title"][0] # grabs the "title" 
     mags.append(mag)
     lons.append(lon)
     lats.append(lat)
@@ -41,8 +44,13 @@ data = [{ ### created dictionary to customize size of dots on map
     'type': 'scattergeo',
     'lon': lons,
     'lat': lats,
+    'HoverTexts': hover,
     'marker':{
-        'size':[5*mag for mag in mags], ## magnifies size of each dot 5 times
+        'size':[5*mag for mag in mags],## magnifies size of each dot 5 times
+        'color': mags,
+        'colorscale': 'Viridis',
+        'reversescale': True,
+        'colorbar' : {'title':'Magnitude'} ## gives the little color thing on the side 
         },
 }]
 

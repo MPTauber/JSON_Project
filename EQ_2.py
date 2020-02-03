@@ -1,5 +1,7 @@
 ############ if P:\Advanced not recognized, go into vscode --> settings.json --> delete the beginning of "" 
 ############ and leave "JSON_project\\Scripts\\python.exe"
+
+#################### if pyplot doesnt work (line under the "from"s) then go into the terminal and do: pip3 install pyplot
 import json
 
 in_file = open("eq_data_1_day_m1.json","r")
@@ -42,7 +44,11 @@ data = [{ ### created dictionary to customize size of dots on map
     'lon': lons,
     'lat': lats,
     'marker':{
-        'size':[5*mag for mag in mags], ## magnifies size of each dot 5 times
+        'size':[5*mag for mag in mags],## magnifies size of each dot 5 times
+        'color': mags,
+        'colorscale': 'Viridis',
+        'reversescale': True,
+        'colorbar' : {'title':'Magnitude'} ## gives the little color thing on the side 
         },
 }]
 
