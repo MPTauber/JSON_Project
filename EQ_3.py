@@ -4,7 +4,7 @@
 #################### if pyplot doesnt work (line under the "from"s) then go into the terminal and do: pip3 install pyplot
 import json
 
-in_file = open("eq_data_1_day_m1.json","r")
+in_file = open("eq_data_30_day_m1.json","r")
 out_file = open("readable_eq_data.json", "w")
 
 eq_data = json.load(in_file) #loads it as a dictionary (cause thatrs what json is in)
@@ -28,7 +28,7 @@ for eq in list_of_eqs:
     ###############################So the key is properties, and the key of that is mag
     lon = eq["geometry"]["coordinates"][0]
     lat = eq["geometry"]["coordinates"][1]
-    hover = eq["properties"]["title"][0] # grabs the "title" 
+    hover_texts = eq["properties"]["title"] # grabs the "title" 
     mags.append(mag)
     lons.append(lon)
     lats.append(lat)
@@ -44,7 +44,7 @@ data = [{ ### created dictionary to customize size of dots on map
     'type': 'scattergeo',
     'lon': lons,
     'lat': lats,
-    'HoverTexts': hover,
+    'text': hover_texts,
     'marker':{
         'size':[5*mag for mag in mags],## magnifies size of each dot 5 times
         'color': mags,
