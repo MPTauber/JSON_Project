@@ -4,18 +4,18 @@
 # You will need separate programs to represent each CSV file. One file is from Nov 27 2019 and the other is from Jan 26 2020. 
 import csv
 
-open_file = open("MODIS_C6_Australia_NewZealand_MCD14DL_NRT_2019331.txt","r") 
+open_file = open("MODIS_C6_Australia_NewZealand_MCD14DL_NRT_2020026.txt","r") 
 readFile = csv.reader(open_file, delimiter =",")
-NovemberData = [row for row in readFile]
+JanuaryData = [row for row in readFile]
 
 brigs, lons, lats = [],[],[] ## lists for brightnesses, longitudes, latitudes
-headers = NovemberData[0]
+headers = JanuaryData[0]
 
-NovemberData_noheaders = NovemberData[1:868]   ### takes header sublist out of list
+JanuaryData_noheaders = JanuaryData[1:868]   ### takes header sublist out of list
 
-lats = [x[0] for x in NovemberData_noheaders]
-lons = [x[1] for x in NovemberData_noheaders]
-brigs = [x[2] for x in NovemberData_noheaders]
+lats = [x[0] for x in JanuaryData_noheaders]
+lons = [x[1] for x in JanuaryData_noheaders]
+brigs = [x[2] for x in JanuaryData_noheaders]
 
 
 from plotly.graph_objs import Scattergeo, Layout ## plotly is a large lib, so we only import a few things
@@ -41,7 +41,7 @@ data = [{ ### creates dictionary to customize size of dots on map
         },
 }]
 
-my_layout = Layout(title = "Australian Fires - November 2019", \
+my_layout = Layout(title = "Australian Fires - January 2020", \
     geo = dict( 
         showland = True,
         lataxis = dict(range=[-37,-13]),
@@ -50,4 +50,4 @@ my_layout = Layout(title = "Australian Fires - November 2019", \
 
 fig = {"data": data, "layout":my_layout}
 
-offline.plot(fig,filename="november_fires.html")
+offline.plot(fig,filename="January_fires.html")
